@@ -206,6 +206,11 @@ x--expand-yaml-anchors--remove:
         run: src/ci/scripts/verify-line-endings.sh
         <<: *step
 
+      - name: ensure beta commits are in master
+        run: src/ci/scripts/verify-beta-commits.sh
+        if: github.base_ref == 'refs/heads/beta'
+        <<: *step
+
       - name: run the build
         run: src/ci/scripts/run-build-from-ci.sh
         env:
